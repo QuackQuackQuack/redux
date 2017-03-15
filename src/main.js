@@ -3,7 +3,6 @@ import reducers from './reducers';
 import * as actions from './actions';
 import $ from 'jquery';
 import select from './hbs/select.hbs';
-//import testhbs from './hbs/test.hbs';
 const store = createStore(reducers);
 
 
@@ -53,9 +52,6 @@ $('[data-index="select"]').change(function() {
     store.dispatch(actions.changeOption(test2));
   }
 });
-
-$('body').append(testhbs);
-
 store.subscribe(() => {
   makeSelect();
   console.log(store.getState());
