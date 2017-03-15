@@ -1,6 +1,6 @@
-# redux
+# redux example
 
-> A redux.js project
+> A redux example project
 
 ## Build Setup
 
