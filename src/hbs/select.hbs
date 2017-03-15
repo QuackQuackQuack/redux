@@ -1,0 +1,9 @@
+{{#each items}}
+{{#if display}}
+<select data-index="select" id="select-{{id}}">
+  {{#each item}}
+  <option value="{{value}}">{{option}}</option>
+  {{/each}}
+</select>
+{{/if}}
+{{/each}}
