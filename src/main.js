@@ -6,61 +6,98 @@ import select from './hbs/select.hbs';
 const store = createStore(reducers);
 
 
+const data = {
+  items: [
+    {
+      name: '옵션1',
+      value: 0,
+      option: [
+        {
+          name: '옵션1-1',
+          value: 0,
+          option: [
+            {
+              name: '옵션1-1-1',
+              value: 0
+            },
+            {
+              name: '옵션1-1-2',
+              value: 1
+            }
+          ]
+        },
+        {
+          name: '옵션1-2',
+          value: 1,
+          option: [
+            {
+              name: '옵션1-2-1',
+              value: 0
+            },
+            {
+              name: '옵션1-2-2',
+              value: 1
+            }
+          ]
+        },
+      ]
+    },
+    {
+      name: '옵션2',
+      value: 1,
+      option: [
+        {
+          name: '옵션2-1',
+          value: 0,
+          option: [
+            {
+              name: '옵션2-1-1',
+              value: 0
+            },
+            {
+              name: '옵션2-1-2',
+              value: 1
+            }
+          ]
+        },
+        {
+          name: '옵션2-2',
+          value: 1,
+          option: [
+            {
+              name: '옵션2-2-1',
+              value: 0
+            },
+            {
+              name: '옵션2-2-2',
+              value: 1
+            }
+          ]
+        },
+      ]
+    }
+  ]
+}
 
-function makeSelect() {
+
+function init(initData) {
+  store.dispatch(actions.selectInit(initData));
+}
+//
+function makeSelect () {
   $('body').html('').append(select(store.getState().select));
 }
 
-const test = {
-  id: 1,
-  display: true,
-  item: [
-    {
-      option: '옵션1-1',
-      value: '0'
-    },
-    {
-      option: '옵션1-2',
-      value: '1'
-    }
-  ]
-};
-const test2 = {
-  id: 2,
-  display: true,
-  item: [
-    {
-      option: '옵션2-1',
-      value: '0'
-    },
-    {
-      option: '옵션2-2',
-      value: '1'
-    }
-  ]
-};
-
+init(data);
 makeSelect();
-$('[data-index="select"]').change(function() {
 
-  const thisValue = $(this).val();
-  if (thisValue === '0') {
-    store.dispatch(actions.changeOption(test));
-  }
-  if (thisValue === '1') {
-    console.log('1');
-    store.dispatch(actions.changeOption(test2));
-  }
+$(document).on('change', '[data-index="select"]', function() {
+  const currentSelet = $(this).attr('data-index-select');
+  const selectIndex = $(this)[0].selectedIndex;
+  const selectValue = $(this).val();
+  store.dispatch(actions.changeOption(currentSelet ,selectIndex, selectValue));
 });
+
 store.subscribe(() => {
   makeSelect();
-  console.log(store.getState());
 });
-//
-// document.getElementById('increment').addEventListener('click', function () {
-//   store.dispatch(actions.increment());
-// });
-//
-// document.getElementById('decrement').addEventListener('click', function () {
-//   store.dispatch(actions.decrement());
-// });

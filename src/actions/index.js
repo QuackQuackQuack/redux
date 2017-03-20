@@ -54,9 +54,19 @@ export function deleteOffset(id) {
   };
 }
 
-export function changeOption(data) {
+export function selectInit(loadData) {
+  return {
+    type: types.SELECT_INIT,
+    loadData
+  };
+}
+
+
+export function changeOption(currentSelet, selectIndex, selectValue) {
   return {
     type: types.CHANGE_OPTION,
-    data
+    currentSelet,
+    selectIndex,
+    selectValue
   };
 }

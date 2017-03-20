@@ -22,7 +22,7 @@ module.exports = {
     alias: {
       '@': resolve('src'),
       'redux-devtools/lib': path.join(__dirname, '..', '..', 'src'),
-      'redux-devtools': path.join(__dirname, '..', '..', 'src')      
+      'redux-devtools': path.join(__dirname, '..', '..', 'src')
     }
   },
   module: {
@@ -30,6 +30,12 @@ module.exports = {
       {
           test: /\.hbs/,
           loader: 'handlebars-loader',
+          query: {
+            helperDirs: [
+              resolve('src/helpers')
+            ],
+            runtime: 'handlebars/runtime',
+          },
           exclude: /(node_modules|bower_components)/
       },
       {
